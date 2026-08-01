@@ -7,8 +7,8 @@ backend:
 media_folder: public/uploads
 public_folder: /uploads
 
-site_url: https://raeum-dich-gluecklich.ch
-display_url: https://raeum-dich-gluecklich.ch
+site_url: https://raeumdichgluecklich.ch
+display_url: https://raeumdichgluecklich.ch
 logo_url: /logo-haus.png
 
 publish_mode: simple
