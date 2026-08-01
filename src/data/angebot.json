@@ -1,13 +1,11 @@
 {
   "metaTitle": "Angebot & Preise – Räum dich glücklich",
   "metaDescription": "Aufräumbegleitung für Privatpersonen: CHF 110 pro Stunde, Ablauf in drei Schritten, kostenloses Kennenlern-Telefonat.",
-
   "kicker": "Angebot",
   "title": "Aufräumbegleitung für Privatpersonen",
   "lead": "Etwas, das du schon lange vor dir herschiebst, endlich anpacken. Schritt für Schritt, in deinem Tempo. Ich räume nicht für dich auf: Du triffst die Entscheidungen, ich unterstütze dich dabei.",
   "headImage": "/uploads/aussortieren.jpg",
   "headImageAlt": "Hände falten einen Pullover in eine Schachtel neben gefalteten Kleidern",
-
   "ablaufTitle": "Ablauf der Aufräumbegleitung",
   "ablaufSteps": [
     {
@@ -26,18 +24,16 @@
       "text": "Wie oft wir uns sehen, bestimmst du: fixer Wochentermin oder einmal im Monat. Je nach Zuhause dauert die Begleitung ein paar Wochen oder länger. Fertig ist sie, wenn es sich für dich richtig anfühlt – und bei jedem Ding entscheidest du in Ruhe, ob es bleiben darf."
     }
   ],
-
   "ordnungImage": "/uploads/hausapotheke.jpg",
   "ordnungImageAlt": "Aufgeräumtes Badezimmerregal mit Hausapotheke",
   "ordnungTitle": "So bleibt die Ordnung",
   "ordnungPoints": [
     "Alles bekommt einen festen Platz: Du lernst, Sachen so zu sortieren, dass du sie **dauerhaft wiederfindest**.",
-    "Wir starten mit dem Einfachen, bei mir immer zuerst die **Medikamente im Badezimmer**. Als MPA weiss ich, was in die Hausapotheke gehört und was weg darf.",
+    "Wir starten mit dem Einfachen, bei mir immer zuerst die **Hausapotheke**. Als MPA weiss ich, was in die Hausapotheke gehört und was weg darf.",
     "Emotionale Orte wie **Keller oder Estrich** kommen ganz zum Schluss, wenn du im Entscheiden schon geübt bist."
   ],
   "zielTitle": "Mein Ziel",
   "zielText": "Dass du mich irgendwann **nicht mehr brauchst** und mich trotzdem weiterempfiehlst. Ordnung ist keine Einmal-Aktion: Darum zeige ich dir unterwegs alle Handgriffe, mit denen du sie nachher selbst halten kannst.",
-
   "situationenTitle": "Kommt dir das bekannt vor?",
   "situationenLead": "Die grösste Hürde ist selten das Aufräumen selbst. Es ist das Anfangen. Vielleicht erkennst du dich in einer dieser Situationen wieder:",
   "situationen": [
@@ -72,14 +68,13 @@
       "wish": "Dein Wunsch: eine Wohnung, in die du jemanden spontan mitnehmen magst – für gemütliche Stunden zu zweit."
     }
   ],
-
   "preisKicker": "Preis",
   "preisBetrag": "CHF 110",
-  "preisEinheit": " / Stunde",
+  "preisEinheit": "/ Stunde",
   "preisZeilen": [
     "Termine ab 2 Stunden am Stück",
     "Erster Termin: 3 Stunden vor Ort, 2 verrechnet",
-    "Anfahrt bis 25 km (einfache Fahrt) ab [Wohnort] inbegriffen, danach CHF 1.20 pro Kilometer",
+    "Anfahrt bis 25 km (einfache Fahrt) ab Gutenswil inbegriffen, danach CHF 1.20 pro Kilometer",
     "Alles, was wir zum Aufräumen brauchen, bringe ich mit"
   ],
   "fuerDichTitle": "Für dich, wenn …",
@@ -90,8 +85,7 @@
     "du findest, Ordnung soll kein Privileg sein"
   ],
   "preisHinweis": "Ich begleite alltägliche Privathaushalte. Für Extremsituationen bin ich nicht die richtige Ansprechpartnerin. Da verweise ich dich gerne an eine passende Fachstelle weiter.",
-
   "ctaTitle": "Unsicher, ob das etwas für dich ist?",
-  "ctaText": "Ruf mich einfach an: Das Kennenlern-Telefonat kostet nichts und verpflichtet dich zu nichts.",
+  "ctaText": "Schreib mich einfach an und wir vereinbaren einen Telefontermin: Das Kennenlern-Telefonat kostet nichts und verpflichtet dich zu nichts.",
   "ctaButtonLabel": "Kontakt aufnehmen"
 }
