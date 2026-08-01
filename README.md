@@ -55,7 +55,7 @@ gh repo create raeumdichgluecklich --private --source=. --push
 In `public/admin/config.yml` ganz oben:
 
 ```yaml
-repo: DEIN-GITHUB-NAME/raeumdichgluecklich
+repo: mystery2769/raeumdichgluecklich
 branch: main
 ```
 

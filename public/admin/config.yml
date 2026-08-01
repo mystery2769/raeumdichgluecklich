@@ -1,7 +1,7 @@
 backend:
   name: github
-  # ↓↓↓ HIER ANPASSEN: dein GitHub-Benutzername / Repository-Name
-  repo: DEIN-GITHUB-NAME/raeum-dich-gluecklich
+
+  repo: mystery2769/raeumdichgluecklich
   branch: main
 
 media_folder: public/uploads
