@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import d from '../content/kundenstimmen.json';
+---
+<Base title={d.metaTitle} description={d.metaDescription} current="kundenstimmen">
+
+<section>
+  <div class="wrap page-head" style="align-items: center; text-align: center;">
+    <p class="kicker">{d.kicker}</p>
+    <h1 class="h1-page">{d.title}</h1>
+    <p class="lead" style="max-width: 620px;">{d.lead}</p>
+  </div>
+</section>
+
+<section style="padding-top: 64px;">
+  <div class="wrap">
+    <figure class="quote-featured">
+      <span class="quote-mark" aria-hidden="true">«</span>
+      {d.featuredTag && <p class="tag">{d.featuredTag}</p>}
+      <blockquote>{d.featuredQuote}</blockquote>
+      <figcaption>{d.featuredAuthor}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec sec-end">
+  <div class="wrap grid3">
+    {d.stimmen.map((s) => (
+      <figure class="quote">
+        <span class="quote-mark quote-mark-sm" aria-hidden="true">«</span>
+        {s.tag && <p class="tag">{s.tag}</p>}
+        <blockquote>{s.quote}</blockquote>
+        <figcaption>{s.author}</figcaption>
+      </figure>
+    ))}
+    <div class="quote-invite">
+      <p class="tag" style="color: var(--berry);">{d.einladungTag}</p>
+      <p class="invite-line serif-i">{d.einladungLine}</p>
+      <p style="font-size: 15px; color: var(--muted); line-height: 1.6;">{d.einladungText}</p>
+      <a class="arrow-link" href="/kontakt/" style="margin-top: 6px;">{d.einladungLinkLabel}</a>
+    </div>
+  </div>
+</section>
+
+</Base>

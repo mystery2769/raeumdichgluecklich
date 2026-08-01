@@ -1,0 +1,54 @@
+{
+  "metaTitle": "Räum dich glücklich – Aufräumbegleitung mit Vanessa",
+  "metaDescription": "Ich begleite dich beim Loslassen: Du entscheidest, was gehen darf – damit dein Zuhause wieder dein Wohlfühlort wird. Kostenloses Kennenlern-Telefonat.",
+
+  "heroKicker": "Aufräumbegleitung",
+  "heroTitle": "Räum dich",
+  "heroTitleAccent": "glücklich.",
+  "heroLead": "Stell dir vor, du kommst heim und atmest auf: kein «da müsste ich mal» mehr, kein schlechtes Gewissen. Nur ein Zuhause, das sich wieder nach dir anfühlt.",
+  "heroButtonLabel": "Kostenloses Kennenlern-Telefonat",
+  "heroLinkLabel": "Angebot ansehen →",
+  "heroNote": "Unverbindlich · dipl. Aufräum-Coach und med. Praxisassistentin",
+  "heroImage": "/uploads/wohnzimmer-hero.jpg",
+  "heroImageAlt": "Helles, ruhiges Wohnzimmer mit viel Platz zum Atmen",
+
+  "loslassenKicker": "Loslassen",
+  "loslassenTitle": "Es geht nicht ums Wegwerfen. Es geht ums Loslassen.",
+  "loslassenText": "In vielen Dingen steckt eine Geschichte: ein Geschenk, ein «das war teuer», ein «vielleicht brauche ich es noch». Allein fällt das Entscheiden schwer. Gemeinsam wird es leichter: Ich sitze neben dir und stelle dir die Fragen, die weiterhelfen. Du entscheidest, was bleiben darf und was gehen kann.",
+  "regalCaption1": "Vorher: viel Zeug, wenig Überblick.",
+  "regalCaption2": "Aussortieren, Stück für Stück.",
+  "regalCaption3": "Nachher: alles hat seinen festen Platz.",
+  "valuesLine": "Kein Druck. Keine fixe Zeitvorgabe. Kein richtig oder falsch. Dein Tempo, deine Entscheidungen.",
+
+  "wohlfuehlImage": "/uploads/fenster-licht.jpg",
+  "wohlfuehlImageAlt": "Offenes Fenster mit Licht auf einem aufgeräumten Tisch",
+  "wohlfuehlKicker": "Dein Zuhause",
+  "wohlfuehlTitle": "Damit dein Zuhause wieder dein Wohlfühlort wird.",
+  "wohlfuehlText1": "Du findest auf Anhieb, was du suchst. Spontaner Besuch darf einfach reinkommen. Und am Wochenende gehört die Zeit dir – nicht dem Aufräumen.",
+  "wohlfuehlText2": "Darum geht es: nicht um ein perfektes Zuhause, sondern um eines, in dem du gerne lebst.",
+
+  "cards": [
+    {
+      "title": "Angebot & Preise",
+      "text": "Aufräumbegleitung für Privatpersonen, CHF 110 pro Stunde. Ablauf und Konditionen im Detail.",
+      "linkLabel": "Zum Angebot →",
+      "href": "/angebot/"
+    },
+    {
+      "title": "Wer ist Vanessa?",
+      "text": "Aufräum-Coachin mit MPA-Hintergrund. Vertrauen aufzubauen ist mein Beruf.",
+      "linkLabel": "Über mich →",
+      "href": "/ueber-mich/"
+    },
+    {
+      "title": "Kundenstimmen",
+      "text": "Was andere über die gemeinsame Aufräumbegleitung sagen.",
+      "linkLabel": "Lesen →",
+      "href": "/kundenstimmen/"
+    }
+  ],
+
+  "ctaTitle": "Der erste Schritt ist ein Gespräch.",
+  "ctaText": "Kostenlos und unverbindlich: Wir schauen zusammen, ob es passt.",
+  "ctaButtonLabel": "Kennenlern-Telefonat vereinbaren"
+}

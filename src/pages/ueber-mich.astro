@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import d from '../content/ueber-mich.json';
+---
+<Base title={d.metaTitle} description={d.metaDescription} current="ueber-mich">
+
+<section>
+  <div class="wrap about-grid">
+    <img class="portrait" src={d.portrait} alt={d.portraitAlt}>
+    <div class="about-copy">
+      <p class="kicker">{d.kicker}</p>
+      <h1 class="h1-page">{d.title}</h1>
+      <p>{d.text1}</p>
+      <p>{d.text2}</p>
+      <p class="conviction serif-i">{d.conviction}</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap grid3">
+    {d.features.map((f) => (
+      <div class="col">
+        <h3>{f.title}</h3>
+        <p>{f.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<CtaBand title={d.ctaTitle} text={d.ctaText} buttonLabel={d.ctaButtonLabel} />
+
+</Base>

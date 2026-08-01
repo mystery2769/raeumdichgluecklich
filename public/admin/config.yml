@@ -1,0 +1,235 @@
+backend:
+  name: github
+  # ↓↓↓ HIER ANPASSEN: dein GitHub-Benutzername / Repository-Name
+  repo: DEIN-GITHUB-NAME/raeum-dich-gluecklich
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://raeum-dich-gluecklich.ch
+display_url: https://raeum-dich-gluecklich.ch
+logo_url: /logo-haus.png
+
+publish_mode: simple
+
+collections:
+  # ───────────────────────────── Startseite ─────────────────────────────
+  - name: startseite
+    label: Startseite
+    icon: home
+    files:
+      - name: home
+        label: Startseite
+        file: src/content/home.json
+        fields:
+          - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
+          - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
+
+          - { name: heroKicker, label: "Kleine Überzeile", widget: string }
+          - { name: heroTitle, label: "Grosse Überschrift", widget: string }
+          - { name: heroTitleAccent, label: "Überschrift – farbiger Teil", widget: string }
+          - { name: heroLead, label: "Einleitungstext", widget: text }
+          - { name: heroButtonLabel, label: "Text auf dem Button", widget: string }
+          - { name: heroLinkLabel, label: "Text auf dem Textlink", widget: string }
+          - { name: heroNote, label: "Kleiner Hinweis unter den Buttons", widget: string }
+          - { name: heroImage, label: "Grosses Bild oben", widget: image }
+          - { name: heroImageAlt, label: "Bildbeschreibung (für Blinde/Google)", widget: string }
+
+          - { name: loslassenKicker, label: "Abschnitt «Loslassen» – Überzeile", widget: string }
+          - { name: loslassenTitle, label: "Abschnitt «Loslassen» – Titel", widget: string }
+          - { name: loslassenText, label: "Abschnitt «Loslassen» – Text", widget: text }
+          - { name: regalCaption1, label: "Bücherregal-Animation: Text 1 (unordentlich)", widget: string }
+          - { name: regalCaption2, label: "Bücherregal-Animation: Text 2 (am Sortieren)", widget: string }
+          - { name: regalCaption3, label: "Bücherregal-Animation: Text 3 (aufgeräumt)", widget: string }
+          - { name: valuesLine, label: "Kursive Zeile darunter", widget: text }
+
+          - { name: wohlfuehlImage, label: "Abschnitt «Wohlfühlort» – Bild", widget: image }
+          - { name: wohlfuehlImageAlt, label: "Bildbeschreibung", widget: string }
+          - { name: wohlfuehlKicker, label: "Überzeile", widget: string }
+          - { name: wohlfuehlTitle, label: "Titel", widget: string }
+          - { name: wohlfuehlText1, label: "Text – erster Absatz", widget: text }
+          - { name: wohlfuehlText2, label: "Text – zweiter Absatz", widget: text }
+
+          - name: cards
+            label: "Drei Kacheln unten"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Titel, widget: string }
+              - { name: text, label: Text, widget: text }
+              - { name: linkLabel, label: "Link-Text", widget: string }
+              - { name: href, label: "Ziel-Seite", widget: select, options: ["/", "/ueber-mich/", "/angebot/", "/kundenstimmen/", "/kontakt/"] }
+
+          - { name: ctaTitle, label: "Balken unten – Titel", widget: string }
+          - { name: ctaText, label: "Balken unten – Text", widget: text }
+          - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
+
+  # ───────────────────────────── Über mich ─────────────────────────────
+  - name: ueber_mich
+    label: Über mich
+    icon: person
+    files:
+      - name: ueber_mich
+        label: Über mich
+        file: src/content/ueber-mich.json
+        fields:
+          - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
+          - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
+          - { name: portrait, label: "Portraitfoto", widget: image }
+          - { name: portraitAlt, label: "Bildbeschreibung", widget: string }
+          - { name: kicker, label: "Überzeile", widget: string }
+          - { name: title, label: "Überschrift", widget: string }
+          - { name: text1, label: "Erster Absatz", widget: text }
+          - { name: text2, label: "Zweiter Absatz", widget: text }
+          - { name: conviction, label: "Hervorgehobener Satz (farbig, kursiv)", widget: text }
+          - name: features
+            label: "Drei Punkte «Was mich auszeichnet»"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Titel, widget: string }
+              - { name: text, label: Text, widget: text }
+          - { name: ctaTitle, label: "Balken unten – Titel", widget: string }
+          - { name: ctaText, label: "Balken unten – Text", widget: text }
+          - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
+
+  # ───────────────────────────── Angebot ─────────────────────────────
+  - name: angebot
+    label: Angebot & Preise
+    icon: sell
+    files:
+      - name: angebot
+        label: Angebot & Preise
+        file: src/content/angebot.json
+        fields:
+          - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
+          - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
+          - { name: kicker, label: "Überzeile", widget: string }
+          - { name: title, label: "Überschrift", widget: string }
+          - { name: lead, label: "Einleitungstext", widget: text }
+          - { name: headImage, label: "Breites Bild oben", widget: image }
+          - { name: headImageAlt, label: "Bildbeschreibung", widget: string }
+
+          - { name: ablaufTitle, label: "Titel «Ablauf»", widget: string }
+          - name: ablaufSteps
+            label: "Ablauf-Schritte (Nummerierung automatisch)"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Titel, widget: string }
+              - { name: meta, label: "Zeile mit Dauer/Preis", widget: string }
+              - { name: text, label: Text, widget: text }
+
+          - { name: ordnungImage, label: "Abschnitt «So bleibt die Ordnung» – Bild", widget: image }
+          - { name: ordnungImageAlt, label: "Bildbeschreibung", widget: string }
+          - { name: ordnungTitle, label: "Titel", widget: string }
+          - name: ordnungPoints
+            label: "Punkte (für **fett** zwei Sternchen benutzen)"
+            widget: list
+            field: { name: punkt, label: Punkt, widget: text }
+          - { name: zielTitle, label: "Titel «Mein Ziel»", widget: string }
+          - { name: zielText, label: "Text «Mein Ziel» (**fett** möglich)", widget: text }
+
+          - { name: situationenTitle, label: "Titel «Kommt dir das bekannt vor?»", widget: string }
+          - { name: situationenLead, label: "Einleitung dazu", widget: text }
+          - name: situationen
+            label: "Situationen"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: "Zitat-Titel", widget: string }
+              - { name: text, label: Text, widget: text }
+              - { name: wish, label: "Wunsch-Zeile (kursiv)", widget: text }
+
+          - { name: preisKicker, label: "Preis – Überzeile", widget: string }
+          - { name: preisBetrag, label: "Preis – grosse Zahl", widget: string, hint: "z. B. CHF 110" }
+          - { name: preisEinheit, label: "Preis – Zusatz", widget: string, hint: "z. B.  / Stunde" }
+          - name: preisZeilen
+            label: "Preis – Konditionen"
+            widget: list
+            field: { name: zeile, label: Zeile, widget: text }
+          - { name: fuerDichTitle, label: "Titel «Für dich, wenn …»", widget: string }
+          - name: fuerDichPunkte
+            label: "Punkte «Für dich, wenn …»"
+            widget: list
+            field: { name: punkt, label: Punkt, widget: text }
+          - { name: preisHinweis, label: "Kleingedrucktes", widget: text }
+
+          - { name: ctaTitle, label: "Balken unten – Titel", widget: string }
+          - { name: ctaText, label: "Balken unten – Text", widget: text }
+          - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
+
+  # ───────────────────────────── Kundenstimmen ─────────────────────────────
+  - name: kundenstimmen
+    label: Kundenstimmen
+    icon: reviews
+    files:
+      - name: kundenstimmen
+        label: Kundenstimmen
+        file: src/content/kundenstimmen.json
+        fields:
+          - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
+          - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
+          - { name: kicker, label: "Überzeile", widget: string }
+          - { name: title, label: "Überschrift", widget: string }
+          - { name: lead, label: "Einleitungstext", widget: text }
+
+          - { name: featuredTag, label: "Grosse Stimme – kleines Label", widget: string, required: false, hint: "Leer lassen, sobald es eine echte Stimme ist" }
+          - { name: featuredQuote, label: "Grosse Stimme – Zitat", widget: text }
+          - { name: featuredAuthor, label: "Grosse Stimme – wer hat es gesagt", widget: string }
+
+          - name: stimmen
+            label: "Weitere Kundenstimmen"
+            widget: list
+            summary: "{{fields.author}}"
+            fields:
+              - { name: tag, label: "Kleines Label", widget: string, required: false }
+              - { name: quote, label: "Zitat", widget: text }
+              - { name: author, label: "Wer hat es gesagt", widget: string }
+
+          - { name: einladungTag, label: "Einladungs-Kachel – Label", widget: string }
+          - { name: einladungLine, label: "Einladungs-Kachel – grosse Zeile", widget: string }
+          - { name: einladungText, label: "Einladungs-Kachel – Text", widget: text }
+          - { name: einladungLinkLabel, label: "Einladungs-Kachel – Link", widget: string }
+
+  # ───────────────────────────── Kontakt ─────────────────────────────
+  - name: kontakt
+    label: Kontakt
+    icon: mail
+    files:
+      - name: kontakt
+        label: Kontakt
+        file: src/content/kontakt.json
+        fields:
+          - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
+          - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
+          - { name: kicker, label: "Überzeile", widget: string }
+          - { name: title, label: "Überschrift", widget: string }
+          - { name: lead, label: "Einleitungstext", widget: text }
+          - { name: email, label: "E-Mail-Adresse", widget: string }
+          - { name: whatsappNummer, label: "WhatsApp-Nummer (sichtbar)", widget: string, hint: "z. B. +41 79 123 45 67" }
+          - { name: whatsappLink, label: "WhatsApp-Link", widget: string, hint: "https://wa.me/41791234567 – Nummer ohne + und ohne Leerzeichen" }
+          - { name: note, label: "Hinweis (Einsatzgebiet, Termine)", widget: string }
+          - name: steps
+            label: "Drei Schritte «Was dich erwartet»"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Titel, widget: string }
+              - { name: text, label: Text, widget: text }
+
+  # ───────────────────────────── Allgemein ─────────────────────────────
+  - name: einstellungen
+    label: Allgemein (Kopf & Fuss)
+    icon: settings
+    files:
+      - name: site
+        label: Kopf- und Fusszeile
+        file: src/content/site.json
+        fields:
+          - { name: brand, label: "Name oben links", widget: string }
+          - { name: logo, label: "Logo", widget: image }
+          - { name: footerName, label: "Fusszeile – dein Name", widget: string }
+          - { name: footerLine, label: "Fusszeile – zweite Zeile", widget: string }
+          - { name: footerCopyright, label: "Fusszeile – Copyright", widget: string }

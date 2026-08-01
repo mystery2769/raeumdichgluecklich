@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Bookshelf from '../components/Bookshelf.astro';
+import d from '../content/home.json';
+---
+<Base title={d.metaTitle} description={d.metaDescription} current="home">
+
+<header>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">{d.heroKicker}</p>
+      <h1 class="h1">{d.heroTitle} <em class="serif-i">{d.heroTitleAccent}</em></h1>
+      <p class="lead" style="max-width: 460px;">{d.heroLead}</p>
+      <div class="hero-actions">
+        <a href="/kontakt/" class="btn">{d.heroButtonLabel}</a>
+        <a href="/angebot/" class="arrow-link">{d.heroLinkLabel}</a>
+      </div>
+      <p class="hero-note">{d.heroNote}</p>
+    </div>
+    <img class="hero-img" src={d.heroImage} alt={d.heroImageAlt}>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split" style="margin-top: 0; align-items: center;">
+      <div>
+        <p class="kicker">{d.loslassenKicker}</p>
+        <h2 class="h2" style="margin-top: 10px;">{d.loslassenTitle}</h2>
+        <p class="lead" style="margin-top: 16px; font-size: 17px;">{d.loslassenText}</p>
+      </div>
+      <Bookshelf captions={[d.regalCaption1, d.regalCaption2, d.regalCaption3]} />
+    </div>
+    <p class="values-line serif-i">{d.valuesLine}</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap wf-grid">
+    <img class="wf-img" src={d.wohlfuehlImage} alt={d.wohlfuehlImageAlt}>
+    <div class="wf-copy">
+      <p class="kicker">{d.wohlfuehlKicker}</p>
+      <h2 class="h2" style="margin-top: 10px;">{d.wohlfuehlTitle}</h2>
+      <p style="margin-top: 16px; line-height: 1.7;">{d.wohlfuehlText1}</p>
+      <p style="margin-top: 12px; line-height: 1.7;">{d.wohlfuehlText2}</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap grid3">
+    {d.cards.map((c) => (
+      <a class="col" href={c.href}>
+        <h3>{c.title}</h3>
+        <p>{c.text}</p>
+        <span class="go">{c.linkLabel}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<CtaBand title={d.ctaTitle} text={d.ctaText} buttonLabel={d.ctaButtonLabel} />
+
+</Base>

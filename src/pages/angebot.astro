@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { md } from '../lib/md.js';
+import d from '../content/angebot.json';
+---
+<Base title={d.metaTitle} description={d.metaDescription} current="angebot">
+
+<header>
+  <div class="wrap page-head">
+    <p class="kicker">{d.kicker}</p>
+    <h1 class="h1-page">{d.title}</h1>
+    <p class="lead" style="max-width: 660px;">{d.lead}</p>
+    <img class="page-img" src={d.headImage} alt={d.headImageAlt}>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2">{d.ablaufTitle}</h2>
+    <div class="grid3" style="margin-top: 36px;">
+      {d.ablaufSteps.map((s, i) => (
+        <div class="col">
+          <p class="num">{i + 1}</p>
+          <h3 style="font-size: 20px;">{s.title}</h3>
+          <p class="step-meta">{s.meta}</p>
+          <p>{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split" style="margin-top: 0;">
+      <img class="split-img" src={d.ordnungImage} alt={d.ordnungImageAlt}>
+      <div>
+        <h3>{d.ordnungTitle}</h3>
+        <div class="dash-list" style="margin-top: 16px;">
+          {d.ordnungPoints.map((p) => (
+            <div><p set:html={md(p)} /></div>
+          ))}
+        </div>
+        <h3 style="margin-top: 28px;">{d.zielTitle}</h3>
+        <p style="margin-top: 12px; line-height: 1.7;" set:html={md(d.zielText)} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2">{d.situationenTitle}</h2>
+    <p class="lead" style="max-width: 640px; margin-top: 14px; font-size: 17px;">{d.situationenLead}</p>
+    <div class="grid3" style="margin-top: 36px; row-gap: 48px;">
+      {d.situationen.map((s) => (
+        <div class="col">
+          <h3 class="serif-i" style="font-size: 21px;">{s.title}</h3>
+          <p>{s.text}</p>
+          <p class="wish">{s.wish}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="price-grid">
+      <div class="price-cell">
+        <p class="kicker">{d.preisKicker}</p>
+        <p class="price-big">{d.preisBetrag}<span>{d.preisEinheit}</span></p>
+        <div class="price-rows">
+          {d.preisZeilen.map((z) => <p>{z}</p>)}
+        </div>
+      </div>
+      <div class="price-cell price-cell-b">
+        <h3>{d.fuerDichTitle}</h3>
+        <div class="dash-list" style="margin-top: 16px;">
+          {d.fuerDichPunkte.map((p) => <div><p>{p}</p></div>)}
+        </div>
+        <p class="fine">{d.preisHinweis}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<CtaBand title={d.ctaTitle} text={d.ctaText} buttonLabel={d.ctaButtonLabel} />
+
+</Base>

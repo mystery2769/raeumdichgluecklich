@@ -1,0 +1,30 @@
+{
+  "metaTitle": "Kundenstimmen – Räum dich glücklich",
+  "metaDescription": "Was Kundinnen über die gemeinsame Aufräumbegleitung mit Vanessa sagen.",
+
+  "kicker": "Kundenstimmen",
+  "title": "Was andere sagen",
+  "lead": "Mein schönstes Kompliment: Kundinnen, die mich nicht mehr brauchen und mich trotzdem weiterempfehlen.",
+
+  "featuredTag": "Platzhalter",
+  "featuredQuote": "Hier kommt deine schönste Kundenstimme hin. Zum Beispiel, wie es sich angefühlt hat, den Kleiderschrank endlich geschafft zu haben.",
+  "featuredAuthor": "S., Vanessas Schwester",
+
+  "stimmen": [
+    {
+      "tag": "Platzhalter",
+      "quote": "Hier kommt eine echte Kundenstimme hin. Zum Beispiel, dass es ohne Druck war und man selbst entscheiden durfte.",
+      "author": "Kundin aus [Ort]"
+    },
+    {
+      "tag": "Platzhalter",
+      "quote": "Hier kommt eine echte Kundenstimme hin. Zum Beispiel, dass jetzt alles seinen festen Platz hat und man es wiederfindet.",
+      "author": "Kundin aus [Ort]"
+    }
+  ],
+
+  "einladungTag": "Dein Platz",
+  "einladungLine": "Hier ist Platz für deine Geschichte.",
+  "einladungText": "Starte mit einem kostenlosen Kennenlern-Telefonat.",
+  "einladungLinkLabel": "Kontakt aufnehmen →"
+}

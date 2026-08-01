@@ -1,0 +1,119 @@
+---
+// Animiertes Bücherregal (unordentlich → fliegend → aufgeräumt).
+// Reines JavaScript, ohne Framework.
+const { captions } = Astro.props;
+---
+<div class="shelf-wrap">
+  <div class="shelf-scale"><div class="shelf" data-shelf></div></div>
+  <div class="shelf-cap-row">
+    <div class="shelf-dots" data-shelf-dots></div>
+    <p class="shelf-cap" data-shelf-cap>{captions[0]}</p>
+  </div>
+</div>
+
+<script type="application/json" data-shelf-captions set:html={JSON.stringify(captions)} />
+
+<style is:global>
+  /* Global, weil die Bücher zur Laufzeit per JavaScript erzeugt werden
+     und dann keine Astro-Scope-Klasse hätten. */
+  .shelf { position: relative; width: 380px; height: 300px; }
+  .shelf-dots { display: flex; gap: 6px; }
+  .shelf-dots span { width: 8px; height: 8px; border-radius: 50%; background: #E3D4C8; transition: background .4s; }
+  .shelf-dots span.on { background: #A02C6A; }
+  .book { position: absolute; border-radius: 4px 4px 2px 2px; z-index: 2; }
+  .book i { position: absolute; left: 4px; right: 4px; display: block; background: rgba(255,255,255,.5); border-radius: 3px; }
+  .book i.a { top: 9px; height: 7px; }
+  .book i.b { top: 21px; height: 4px; background: rgba(255,255,255,.32); border-radius: 2px; }
+</style>
+
+<script>
+  const WOOD = '#D8BC96';
+  const ROW1 = [
+    { w: 30, h: 116, c: '#C4808F', m: [46, 0, 14],    f: [-150, -190, -140] },
+    { w: 24, h: 112, c: '#D3A28F', m: [150, 44, 90],  f: [90, -250, 170] },
+    { w: 28, h: 108, c: '#C9A46A', m: [-52, 0, -12],  f: [200, -160, 110] },
+    { w: 24, h: 104, c: '#A8B08C', m: [96, 0, 18],    f: [-220, -140, -190] },
+    { w: 30, h: 100, c: '#8FA3B5', m: [-108, 0, -7],  f: [140, -260, 150] },
+    { w: 24, h: 96,  c: '#9B85AB', m: [26, 40, 90],   f: [-60, -230, -100] },
+    { w: 28, h: 92,  c: '#C08466', m: [-170, 0, 9],   f: [230, -200, 230] }
+  ];
+  const ROW2 = [
+    { w: 30, h: 110, c: '#7F9E94', m: [88, 0, -16],   f: [-190, -280, -150] },
+    { w: 24, h: 105, c: '#B5BE9C', m: [-38, 0, 11],   f: [70, -330, 120] },
+    { w: 28, h: 100, c: '#D8C49A', m: [140, 46, 90],  f: [190, -300, -210] },
+    { w: 24, h: 95,  c: '#B78A5E', m: [-96, 0, -9],   f: [-110, -350, 160] },
+    { w: 30, h: 90,  c: '#A26D7D', m: [40, 0, 15],    f: [150, -340, -120] },
+    { w: 24, h: 85,  c: '#74839B', m: [-150, 0, -13], f: [-230, -310, 200] },
+    { w: 28, h: 80,  c: '#D0B0A0', m: [10, 42, 90],   f: [40, -370, -170] }
+  ];
+  const EASE = ['cubic-bezier(.6,.05,.4,1)', 'cubic-bezier(.5,.05,.75,.4)', 'cubic-bezier(.3,1.35,.55,1)'];
+  const DUR = [3000, 1700, 5000];
+
+  const shelf = document.querySelector('[data-shelf]');
+  if (shelf) {
+    const capEl = document.querySelector('[data-shelf-cap]');
+    const dotsEl = document.querySelector('[data-shelf-dots]');
+    const capJson = document.querySelector('[data-shelf-captions]');
+    const captions = capJson ? JSON.parse(capJson.textContent) : [];
+
+    const frame = document.createElement('div');
+    frame.style.cssText = `position:absolute;inset:0;background:#FFFDFA;border:10px solid ${WOOD};border-radius:14px;box-sizing:border-box;box-shadow:0 24px 48px rgba(53,36,58,.10), inset 0 0 0 2px rgba(150,110,70,.10)`;
+    shelf.appendChild(frame);
+
+    const plank = document.createElement('div');
+    plank.style.cssText = `position:absolute;left:9px;right:9px;bottom:140px;height:10px;background:${WOOD};box-shadow:0 3px 6px rgba(120,90,60,.16);z-index:1`;
+    shelf.appendChild(plank);
+
+    const books = [];
+    const addRow = (row, bottom, delayBase) => {
+      let x = 26;
+      row.forEach((b, i) => {
+        const el = document.createElement('div');
+        el.className = 'book';
+        el.style.bottom = bottom + 'px';
+        el.style.left = x + 'px';
+        el.style.width = b.w + 'px';
+        el.style.height = b.h + 'px';
+        el.style.background = `linear-gradient(90deg, ${b.c} 55%, rgba(80,50,40,.16))`;
+        el.style.backgroundColor = b.c;
+        el.style.transitionProperty = 'transform';
+        el.style.transitionDuration = '1s';
+        el.style.transitionDelay = (i * 70 + delayBase) + 'ms';
+        el.innerHTML = '<i class="a"></i><i class="b"></i>';
+        shelf.appendChild(el);
+        books.push({ el, ...b });
+        x += b.w + 7;
+      });
+    };
+    addRow(ROW1, 150, 0);
+    addRow(ROW2, 10, 120);
+
+    [0, 1, 2].forEach(() => dotsEl.appendChild(document.createElement('span')));
+
+    const render = (phase) => {
+      books.forEach((b) => {
+        const t = phase === 0 ? b.m : phase === 1 ? b.f : [0, 0, 0];
+        const lying = phase === 0 && b.m[2] === 90;
+        const dy = lying ? (b.h - b.w) / 2 : t[1];
+        b.el.style.transitionTimingFunction = EASE[phase];
+        b.el.style.transform = `translate(${t[0]}px, ${dy}px) rotate(${t[2]}deg)`;
+      });
+      if (captions[phase]) capEl.textContent = captions[phase];
+      dotsEl.querySelectorAll('span').forEach((s, i) => s.classList.toggle('on', i === phase));
+    };
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      render(2);
+    } else {
+      let phase = 0;
+      render(0);
+      const step = () => {
+        phase = (phase + 1) % 3;
+        render(phase);
+        setTimeout(step, DUR[phase]);
+      };
+      setTimeout(step, DUR[0]);
+    }
+  }
+</script>

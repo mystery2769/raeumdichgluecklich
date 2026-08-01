@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import d from '../content/kontakt.json';
+---
+<Base title={d.metaTitle} description={d.metaDescription} current="kontakt">
+
+<section>
+  <div class="wrap contact-head">
+    <p class="kicker">{d.kicker}</p>
+    <h1 class="h1-page">{d.title}</h1>
+    <p class="lead" style="max-width: 540px;">{d.lead}</p>
+    <div class="contact-actions">
+      <a class="btn" href={`mailto:${d.email}`}>{d.email}</a>
+      <a class="btn-ghost" href={d.whatsappLink} rel="noopener">WhatsApp: {d.whatsappNummer}</a>
+    </div>
+    <p class="hero-note">{d.note}</p>
+  </div>
+</section>
+
+<section class="sec sec-end">
+  <div class="wrap grid3">
+    {d.steps.map((s, i) => (
+      <div class="col">
+        <p class="num">{i + 1}</p>
+        <h3 style="font-size: 20px;">{s.title}</h3>
+        <p>{s.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+</Base>

@@ -1,0 +1,60 @@
+---
+import site from '../content/site.json';
+import '../styles/site.css';
+
+const { title, description, current } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home', key: 'home' },
+  { href: '/ueber-mich/', label: 'Über mich', key: 'ueber-mich' },
+  { href: '/angebot/', label: 'Angebot', key: 'angebot' },
+  { href: '/kundenstimmen/', label: 'Kundenstimmen', key: 'kundenstimmen' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="icon" type="image/png" href={site.logo}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="brand"><img src={site.logo} alt={`${site.brand} – Logo`}><span>{site.brand}</span></a>
+    <label class="nav-burger" aria-label="Menü öffnen und schliessen">
+      <input type="checkbox" class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <div class="nav-links">
+      {links.map((l) => (
+        <a href={l.href} class={current === l.key ? 'active' : undefined}>{l.label}</a>
+      ))}
+      <a href="/kontakt/" class={current === 'kontakt' ? 'btn btn-sm active' : 'btn btn-sm'}>Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<slot />
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p><span class="brand-line">{site.brand}</span> · {site.footerName}</p>
+    <p>{site.footerLine}</p>
+    <p class="right">{site.footerCopyright}</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
