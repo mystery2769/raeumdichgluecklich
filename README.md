@@ -14,7 +14,7 @@ npm run build    # Ergebnis landet in dist/
 ## Aufbau
 
 ```
-src/content/*.json      ← ALLE Texte und Bildpfade (das bearbeitet die Kundin)
+src/data/*.json      ← ALLE Texte und Bildpfade (das bearbeitet die Kundin)
 src/pages/*.astro       ← Struktur der 5 Seiten
 src/layouts/Base.astro  ← Navigation, Fusszeile, <head>
 src/components/         ← CTA-Balken, Bücherregal-Animation
@@ -24,7 +24,7 @@ public/admin/           ← das CMS selbst
 ```
 
 Design ändern → `src/styles/site.css`.
-Text ändern → `src/content/*.json` oder eben im CMS.
+Text ändern → `src/data/*.json` oder eben im CMS.
 
 Bei `ordnungPoints` und `zielText` (Seite Angebot) funktioniert `**fett**`.
 

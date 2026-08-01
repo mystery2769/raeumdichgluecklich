@@ -21,7 +21,7 @@ collections:
     files:
       - name: home
         label: Startseite
-        file: src/content/home.json
+        file: src/data/home.json
         fields:
           - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
           - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
@@ -66,13 +66,13 @@ collections:
           - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
 
   # ───────────────────────────── Über mich ─────────────────────────────
-  - name: ueber_mich
+  - name: seite_ueber_mich
     label: Über mich
     icon: person
     files:
       - name: ueber_mich
         label: Über mich
-        file: src/content/ueber-mich.json
+        file: src/data/ueber-mich.json
         fields:
           - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
           - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
@@ -95,13 +95,13 @@ collections:
           - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
 
   # ───────────────────────────── Angebot ─────────────────────────────
-  - name: angebot
+  - name: seite_angebot
     label: Angebot & Preise
     icon: sell
     files:
       - name: angebot
         label: Angebot & Preise
-        file: src/content/angebot.json
+        file: src/data/angebot.json
         fields:
           - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
           - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
@@ -161,13 +161,13 @@ collections:
           - { name: ctaButtonLabel, label: "Balken unten – Button", widget: string }
 
   # ───────────────────────────── Kundenstimmen ─────────────────────────────
-  - name: kundenstimmen
+  - name: seite_kundenstimmen
     label: Kundenstimmen
     icon: reviews
     files:
       - name: kundenstimmen
         label: Kundenstimmen
-        file: src/content/kundenstimmen.json
+        file: src/data/kundenstimmen.json
         fields:
           - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
           - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
@@ -194,13 +194,13 @@ collections:
           - { name: einladungLinkLabel, label: "Einladungs-Kachel – Link", widget: string }
 
   # ───────────────────────────── Kontakt ─────────────────────────────
-  - name: kontakt
+  - name: seite_kontakt
     label: Kontakt
     icon: mail
     files:
       - name: kontakt
         label: Kontakt
-        file: src/content/kontakt.json
+        file: src/data/kontakt.json
         fields:
           - { name: metaTitle, label: "Seitentitel (Google-Tab)", widget: string }
           - { name: metaDescription, label: "Suchmaschinen-Beschreibung", widget: text }
@@ -226,7 +226,7 @@ collections:
     files:
       - name: site
         label: Kopf- und Fusszeile
-        file: src/content/site.json
+        file: src/data/site.json
         fields:
           - { name: brand, label: "Name oben links", widget: string }
           - { name: logo, label: "Logo", widget: image }
