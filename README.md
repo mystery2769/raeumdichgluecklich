@@ -45,16 +45,32 @@ gh repo create raeum-dich-gluecklich --private --source=. --push
 
 (Oder Repo von Hand auf github.com anlegen und pushen.)
 
-## 2. Auf Netlify deployen
+## 2. Hostpoint-Zugangsdaten als GitHub-Secrets hinterlegen
 
-1. netlify.com → **Add new site → Import an existing project** → GitHub → das Repo wählen
-2. Build command: `npm run build`, Publish directory: `dist` (erkennt Netlify meist selbst)
-3. Deploy
+Hostpoint kann kein `npm run build`. Darum baut GitHub Actions die Seite und
+lädt nur das fertige `dist/` per FTPS hoch – siehe
+`.github/workflows/deploy.yml`.
 
-Netlify empfehle ich hier gegenüber Cloudflare Pages, weil der CMS-Login damit
-ohne Zusatzdienst funktioniert (siehe Schritt 4).
+FTP-Zugangsdaten stehen im Hostpoint Control Panel unter **Hosting → FTP**.
+Im GitHub-Repo unter **Settings → Secrets and variables → Actions → New
+repository secret** vier Secrets anlegen:
 
-## 3. Repo-Namen im CMS eintragen
+| Secret | Wert |
+| --- | --- |
+| `FTP_SERVER` | z. B. `ftp.deine-domain.ch` |
+| `FTP_USERNAME` | FTP-Benutzername von Hostpoint |
+| `FTP_PASSWORD` | FTP-Passwort |
+| `FTP_SERVER_DIR` | Zielordner **mit Schrägstrich am Ende**, z. B. `/www/` |
+
+Den richtigen Zielordner im Control Panel oder per FTP-Programm prüfen: Es ist
+der Ordner, in dem die Website ausgeliefert wird (bei Hostpoint je nach Setup
+`www`, `public_html` oder ein Ordner mit dem Domainnamen).
+
+Ab jetzt gilt: **jeder Push nach `main` deployt automatisch.** Ein Deploy lässt
+sich auch von Hand starten unter *Actions → Build und Deploy zu Hostpoint → Run
+workflow*.
+
+## 3. Repo-Namen und Domain eintragen
 
 In `public/admin/config.yml` ganz oben:
 
@@ -63,31 +79,52 @@ repo: DEIN-GITHUB-NAME/raeum-dich-gluecklich
 branch: main
 ```
 
-Ausserdem `site_url` und `display_url` auf die echte Domain setzen, ebenso
+Ausserdem dort `site_url` und `display_url` auf die echte Domain setzen, ebenso
 `site` in `astro.config.mjs`. Danach committen und pushen.
 
-## 4. Login für das CMS freischalten
+## 4. Login für das CMS
 
-In Netlify: **Site configuration → Access & security → OAuth → Install provider
-→ GitHub**. Dafür einmal auf github.com unter *Settings → Developer settings →
-OAuth Apps* eine App anlegen, Callback-URL `https://api.netlify.com/auth/done`,
-und Client ID + Secret bei Netlify eintragen.
+Auf Hostpoint gibt es keinen OAuth-Dienst. Sveltia CMS bietet dafür
+**«Sign In with GitHub Using PAT»** – Anmeldung mit einem persönlichen Token
+statt über OAuth.
 
-Danach: `deine-domain.ch/admin` öffnen → «Mit GitHub anmelden» → fertig.
+Token erzeugen auf github.com unter **Settings → Developer settings → Personal
+access tokens → Fine-grained tokens**:
 
-> Auf Cloudflare Pages geht es genauso, dort braucht es statt Schritt 4 den
-> kostenlosen Worker `sveltia-cms-auth`.
+- *Repository access*: nur das eine Repo
+- *Permissions → Repository permissions*: **Contents: Read and write**
+- Ablaufdatum grosszügig setzen, sonst muss es die Kundin erneuern
+
+Dann `deine-domain.ch/admin/` öffnen → *Sign In with GitHub Using PAT* → Token
+einfügen. Der Browser merkt sich das, es ist eine einmalige Sache.
+
+> Wer den bequemeren OAuth-Login will: der kostenlose Cloudflare-Worker
+> `sveltia-cms-auth` übernimmt das, dann erscheint ein normaler
+> «Mit GitHub anmelden»-Button. Die Seite selbst bleibt trotzdem auf Hostpoint.
 
 ## 5. Kundin einladen
 
 Sie braucht einen kostenlosen GitHub-Account. Diesen im Repo unter
-**Settings → Collaborators → Add people** als *Write* hinzufügen. Mehr nicht –
-sie sieht GitHub danach nie wieder, nur noch `/admin`.
+**Settings → Collaborators → Add people** als *Write* hinzufügen, und sie
+erzeugt sich ihr eigenes Token wie in Schritt 4. Mehr nicht – sie sieht GitHub
+danach nie wieder, nur noch `/admin/`.
 
-## 6. Domain verbinden
+## 6. Domain und HTTPS
 
-Netlify → **Domain management → Add a domain**, dann beim Domain-Anbieter die
-Nameserver bzw. den CNAME eintragen. HTTPS macht Netlify automatisch.
+Läuft komplett bei Hostpoint: Domain im Control Panel auf das Hosting zeigen
+lassen und das kostenlose Let's-Encrypt-Zertifikat aktivieren. HTTPS ist
+Pflicht, sonst funktioniert der CMS-Login nicht.
+
+---
+
+## Ablauf im Betrieb
+
+1. Kundin ändert etwas unter `deine-domain.ch/admin/` und klickt *Save*
+2. Sveltia CMS committet die Änderung nach GitHub
+3. GitHub Actions baut die Seite und lädt sie per FTPS zu Hostpoint
+4. Nach ein bis zwei Minuten ist es live
+
+Der Fortschritt ist jederzeit im Tab *Actions* auf GitHub sichtbar.
 
 ---
 

@@ -1,15 +1,13 @@
 {
   "metaTitle": "Kontakt – Räum dich glücklich",
   "metaDescription": "Kostenloses Kennenlern-Telefonat vereinbaren – per Mail oder WhatsApp. Ich freue mich auf dich!",
-
   "kicker": "Kontakt",
   "title": "Bereit, dich glücklich zu räumen?",
   "lead": "Melde dich für dein kostenloses Kennenlern-Telefonat, per Mail oder WhatsApp. Ich freue mich auf dich!",
-  "email": "hallo@raeum-dich-gluecklich.ch",
-  "whatsappNummer": "+41 79 000 00 00",
-  "whatsappLink": "https://wa.me/41790000000",
-  "note": "Einsatzgebiet: [Wohnort] und Umgebung · Termine nach Vereinbarung",
-
+  "email": "kontakt@raeumdichgluecklich.ch",
+  "whatsappNummer": "+41 79 549 15 25",
+  "whatsappLink": "https://wa.me/41795491525",
+  "note": "Einsatzgebiet: Gutenswil und Umgebung · Termine nach Vereinbarung",
   "steps": [
     {
       "title": "Du meldest dich",
@@ -17,7 +15,7 @@
     },
     {
       "title": "Wir finden einen Termin",
-      "text": "Passt es für uns beide, trägst du dich direkt in meinen Kalender ein. Termine gibt es ab 2 Stunden am Stück."
+      "text": "Passt es für uns beide, vereinbaren wir einen Termin bei dir Zuhause. Termine gibt es ab 2 Stunden am Stück."
     },
     {
       "title": "Wir legen los",
