@@ -1,0 +1,11 @@
+name = "raeumdichgluecklich-auth"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://raeumdichgluecklich.ch"
+
+# Secrets werden NICHT hier eingetragen, sondern einmalig gesetzt mit:
+#   npx wrangler secret put CMS_USERNAME
+#   npx wrangler secret put CMS_PASSWORD
+#   npx wrangler secret put GITHUB_TOKEN
