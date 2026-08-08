@@ -7,6 +7,7 @@ compatibility_date = "2026-01-01"
 # werden. Die github.io-Adresse ist der Ausweichweg, solange das Zertifikat
 # fuer die eigene Domain noch nicht ausgestellt ist.
 ALLOWED_ORIGIN = "https://raeumdichgluecklich.ch,https://mystery2769.github.io"
+REPO = "mystery2769/raeumdichgluecklich"
 
 # Secrets werden NICHT hier eingetragen, sondern einmalig gesetzt mit:
 #   npx wrangler secret put CMS_USERNAME

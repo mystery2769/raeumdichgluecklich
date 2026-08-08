@@ -46,12 +46,72 @@ export default {
         return html(loginPage('Benutzername oder Passwort stimmt nicht.'), 401);
       }
 
-      return html(successPage(env.GITHUB_TOKEN, env.ALLOWED_ORIGIN));
+      // Zeilenende oder Leerzeichen beim Hinterlegen sind eine haeufige Falle.
+      const token = (env.GITHUB_TOKEN ?? '').trim();
+
+      // Token vorab pruefen, damit im CMS nicht nur "Bad credentials" steht.
+      const check = await checkToken(token, env.REPO ?? '');
+      if (!check.ok) {
+        return html(loginPage(check.message), 500);
+      }
+
+      return html(successPage(token, env.ALLOWED_ORIGIN));
     }
 
     return new Response('Method not allowed', { status: 405 });
   },
 };
+
+/**
+ * Prüft den hinterlegten GitHub-Token, bevor er weitergereicht wird.
+ * Liefert eine verständliche Meldung statt GitHubs "Bad credentials".
+ */
+async function checkToken(token, repo) {
+  if (!token) {
+    return { ok: false, message: 'Es ist kein GitHub-Token hinterlegt. Bitte GITHUB_TOKEN setzen.' };
+  }
+
+  let res;
+  try {
+    res = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        accept: 'application/vnd.github+json',
+        'user-agent': 'raeumdichgluecklich-auth',
+      },
+    });
+  } catch {
+    return { ok: false, message: 'GitHub ist gerade nicht erreichbar. Bitte später nochmals versuchen.' };
+  }
+
+  if (res.status === 401) {
+    return {
+      ok: false,
+      message: 'Der hinterlegte GitHub-Token wird abgelehnt. Er ist ungültig, abgelaufen oder widerrufen.',
+    };
+  }
+
+  if (res.status === 404) {
+    return {
+      ok: false,
+      message: `Der Token hat keinen Zugriff auf "${repo}". Beim Erzeugen muss dieses Repository ausgewählt sein.`,
+    };
+  }
+
+  if (!res.ok) {
+    return { ok: false, message: `GitHub antwortet mit Fehler ${res.status}.` };
+  }
+
+  const data = await res.json().catch(() => ({}));
+  if (!data?.permissions?.push) {
+    return {
+      ok: false,
+      message: 'Der Token darf nur lesen. Er braucht unter "Repository permissions" das Recht "Contents: Read and write".',
+    };
+  }
+
+  return { ok: true };
+}
 
 /** Vergleich in konstanter Zeit – verrät nichts über die Länge der Übereinstimmung. */
 function safeEqual(a, b) {
