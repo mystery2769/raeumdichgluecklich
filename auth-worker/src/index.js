@@ -31,12 +31,14 @@ export default {
 
     if (request.method === 'POST') {
       const form = await request.formData();
-      const user = String(form.get('username') ?? '');
-      const pass = String(form.get('password') ?? '');
+      // Getrimmt, weil beim Hinterlegen der Secrets leicht ein Leerzeichen oder
+      // Zeilenende mitkopiert wird – das waere sonst nicht auffindbar.
+      const user = String(form.get('username') ?? '').trim();
+      const pass = String(form.get('password') ?? '').trim();
 
       const ok =
-        safeEqual(user, env.CMS_USERNAME ?? '') &&
-        safeEqual(pass, env.CMS_PASSWORD ?? '');
+        safeEqual(user, (env.CMS_USERNAME ?? '').trim()) &&
+        safeEqual(pass, (env.CMS_PASSWORD ?? '').trim());
 
       if (!ok) {
         // Bremst Rateversuche spürbar aus, ohne echte Nutzer zu stören.
@@ -134,13 +136,19 @@ function successPage(token, allowedOrigin) {
 <script>
   var token = ${JSON.stringify(token ?? '')};
   var provider = ${JSON.stringify(PROVIDER)};
-  var allowed = ${JSON.stringify(allowedOrigin ?? '')};
+  var allowed = ${JSON.stringify(
+    String(allowedOrigin ?? '')
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean),
+  )};
 
   // Ablauf nach dem Muster von Decap/Sveltia CMS: Das Popup meldet sich beim
   // Opener, der Opener bestaetigt, erst danach geht der Token raus.
   window.addEventListener('message', function (e) {
     if (e.data !== 'authorizing:' + provider) return;
-    if (allowed && e.origin !== allowed) return;
+    // Nur an ausdruecklich erlaubte Herkuenfte – und nie unverschluesselt.
+    if (allowed.indexOf(e.origin) === -1) return;
     window.opener.postMessage(
       'authorization:' + provider + ':success:' + JSON.stringify({ token: token, provider: provider }),
       e.origin
