@@ -2,6 +2,10 @@ backend:
   name: github
   repo: mystery2769/raeumdichgluecklich
   branch: main
+  # Eigener Login-Vermittler: prueft Benutzername und Passwort und gibt danach
+  # den GitHub-Zugang frei. Quellcode und Anleitung unter auth-worker/.
+  base_url: https://raeumdichgluecklich-auth.raeumdichgluecklich.workers.dev
+  auth_endpoint: auth
 
 media_folder: public/uploads
 public_folder: /uploads
