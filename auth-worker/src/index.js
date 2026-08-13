@@ -34,6 +34,7 @@ export default {
           restApi: check.ok ? 'ok – Token gueltig und darf schreiben' : check.message,
           graphqlApi: graphql,
           benutzerAbfrage: user,
+          mitarbeiterAbfrage: await checkCollaborator(token, repo),
           benutzernameHinterlegt: Boolean(env.CMS_USERNAME),
           passwortHinterlegt: Boolean(env.CMS_PASSWORD),
         },
@@ -110,6 +111,33 @@ async function checkGraphql(token, repo) {
       return `ok – ${data.data.repository.nameWithOwner}`;
     }
     return `FEHLER (${res.status}): Repository nicht sichtbar`;
+  } catch (e) {
+    return `FEHLER: ${e.message}`;
+  }
+}
+
+/**
+ * Sveltia prüft, ob der angemeldete Benutzer Mitarbeiter des Repositories ist.
+ * Genau daran scheitert es bei fein granulierten Token: Diese Abfrage verlangt
+ * die Berechtigung "Administration", die es beim Erzeugen selten mitbekommt.
+ */
+async function checkCollaborator(token, repo) {
+  try {
+    const me = await fetch('https://api.github.com/user', {
+      headers: { authorization: `Bearer ${token}`, 'user-agent': 'raeumdichgluecklich-auth' },
+    }).then((r) => r.json());
+
+    const res = await fetch(`https://api.github.com/repos/${repo}/collaborators/${me.login}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        accept: 'application/vnd.github+json',
+        'user-agent': 'raeumdichgluecklich-auth',
+      },
+    });
+
+    if (res.status === 204) return `ok – ${me.login} ist Mitarbeiter`;
+    const body = await res.json().catch(() => ({}));
+    return `FEHLER (${res.status}): ${body?.message ?? 'keine Antwort'}`;
   } catch (e) {
     return `FEHLER: ${e.message}`;
   }
