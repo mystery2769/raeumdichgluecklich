@@ -35,6 +35,7 @@ export default {
           graphqlApi: graphql,
           benutzerAbfrage: user,
           mitarbeiterAbfrage: await checkCollaborator(token, repo),
+          schreibrecht: await checkCommitPermission(token, repo, env.BRANCH ?? 'main'),
           benutzernameHinterlegt: Boolean(env.CMS_USERNAME),
           passwortHinterlegt: Boolean(env.CMS_PASSWORD),
         },
@@ -111,6 +112,51 @@ async function checkGraphql(token, repo) {
       return `ok – ${data.data.repository.nameWithOwner}`;
     }
     return `FEHLER (${res.status}): Repository nicht sichtbar`;
+  } catch (e) {
+    return `FEHLER: ${e.message}`;
+  }
+}
+
+/**
+ * Sveltia schreibt über die GraphQL-Mutation createCommitOnBranch. Genau die
+ * verweigern fein granulierte Token teilweise. Hier wird sie mit einer absichtlich
+ * falschen Ausgangsversion aufgerufen: Fehlt das Recht, meldet GitHub
+ * "Resource not accessible" – ist es da, meldet es stattdessen, dass die
+ * Ausgangsversion nicht passt. Geschrieben wird in keinem Fall.
+ */
+async function checkCommitPermission(token, repo, branch) {
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'content-type': 'application/json',
+        'user-agent': 'raeumdichgluecklich-auth',
+      },
+      body: JSON.stringify({
+        query: `mutation($input:CreateCommitOnBranchInput!){ createCommitOnBranch(input:$input){ commit { oid } } }`,
+        variables: {
+          input: {
+            branch: { repositoryNameWithOwner: repo, branchName: branch },
+            message: { headline: 'permission probe' },
+            // Bewusst ungueltig, damit nichts geschrieben wird.
+            expectedHeadOid: '0000000000000000000000000000000000000000',
+            fileChanges: {},
+          },
+        },
+      }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    const messages = (data?.errors ?? []).map((e) => e.message).join(' | ');
+
+    if (/not accessible by personal access token|Resource not accessible/i.test(messages)) {
+      return 'FEHLT – dieser Token darf ueber GraphQL nicht committen. Klassischen Token verwenden.';
+    }
+    if (/expectedHeadOid|head oid|does not match|not a valid/i.test(messages)) {
+      return 'ok – Schreiben ueber GraphQL erlaubt';
+    }
+    return `unklar (${res.status}): ${messages || JSON.stringify(data).slice(0, 200)}`;
   } catch (e) {
     return `FEHLER: ${e.message}`;
   }
