@@ -21,6 +21,21 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Kleiner Statuspunkt zum Nachschauen, ob der hinterlegte Token gilt.
+    // Gibt weder Token noch Passwort preis, nur gueltig ja/nein.
+    if (url.pathname === '/status') {
+      const check = await checkToken((env.GITHUB_TOKEN ?? '').trim(), env.REPO ?? '');
+      return Response.json(
+        {
+          tokenGueltig: check.ok,
+          meldung: check.ok ? 'Token ist gueltig und darf schreiben.' : check.message,
+          benutzernameHinterlegt: Boolean(env.CMS_USERNAME),
+          passwortHinterlegt: Boolean(env.CMS_PASSWORD),
+        },
+        { headers: { 'cache-control': 'no-store' } },
+      );
+    }
+
     if (url.pathname !== '/auth') {
       return new Response('Not found', { status: 404 });
     }
