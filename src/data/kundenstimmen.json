@@ -1,28 +1,24 @@
 {
   "metaTitle": "Kundenstimmen – Räum dich glücklich",
   "metaDescription": "Was Kundinnen über die gemeinsame Aufräumbegleitung mit Vanessa sagen.",
-
   "kicker": "Kundenstimmen",
   "title": "Was andere sagen",
   "lead": "Mein schönstes Kompliment: Kundinnen, die mich nicht mehr brauchen und mich trotzdem weiterempfehlen.",
-
   "featuredTag": "Platzhalter",
   "featuredQuote": "Hier kommt deine schönste Kundenstimme hin. Zum Beispiel, wie es sich angefühlt hat, den Kleiderschrank endlich geschafft zu haben.",
   "featuredAuthor": "S., Vanessas Schwester",
-
   "stimmen": [
     {
-      "tag": "Platzhalter",
-      "quote": "Hier kommt eine echte Kundenstimme hin. Zum Beispiel, dass es ohne Druck war und man selbst entscheiden durfte.",
-      "author": "Kundin aus [Ort]"
+      "tag": "Glückliche Kunden",
+      "quote": "Die Begleitung beim Aufräumen und Sortieren meiner Küche und des Reduit war sehr angenehm. Sie nahm sich Zeit um herauszufinden, was ich von ihr benötige und arbeitete sehr personenzentriert, also auf meine Bedürfnisse bezogen.\nIch fühlte mich während dem Coaching sehr wohl und sie unterstütze mich bei Entscheidungen ruhig und ohne Druck. Mich von Dingen zu trennen fällt mir aufgrund meines Autismus sehr schwer, hier hat mich Vanessa mit ihrer Ruhigen Art sehr abgeholt und mich zu keiner Entscheidung gedrängt. Alles in allem eine 10/10 Begleitung. Ich werde sie wieder buchen und kann sie nur wärmstens empfehlen.",
+      "author": "Kundin aus Wetzikon"
     },
     {
-      "tag": "Platzhalter",
-      "quote": "Hier kommt eine echte Kundenstimme hin. Zum Beispiel, dass jetzt alles seinen festen Platz hat und man es wiederfindet.",
-      "author": "Kundin aus [Ort]"
+      "tag": "Glückliche Kunden",
+      "quote": "Das Aufräumen mit Frau Werner war durchgehend angenehm, gut abgesprochen, strukturiert und realistisch aufgeteilt. Ihre verständnisvolle Art mache es für mich leichter, ihre Hilfe überhaupt in Anspruch zu nehmen. Ich hasse es aufzuräumen und habe dies auch nie gelernt, obwohl ich eigentlich gerne Ordnung hätte. Meine Neurodivergenz erschwert es mir zusätzlich, überhaupt strukturierte Ordnung zu haben und eine Routine zu bilden. Frau Werner hat vorab realistisch Ziele und Wünsche mit mir festgelegt, auch eigene Aufgaben machbar festgelegt. Entsorgt wurde nur, was ich selber entschied.",
+      "author": "Kundin aus Gutenswil"
     }
   ],
-
   "einladungTag": "Dein Platz",
   "einladungLine": "Hier ist Platz für deine Geschichte.",
   "einladungText": "Starte mit einem kostenlosen Kennenlern-Telefonat.",
