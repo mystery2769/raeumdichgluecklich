@@ -24,11 +24,16 @@ export default {
     // Kleiner Statuspunkt zum Nachschauen, ob der hinterlegte Token gilt.
     // Gibt weder Token noch Passwort preis, nur gueltig ja/nein.
     if (url.pathname === '/status') {
-      const check = await checkToken((env.GITHUB_TOKEN ?? '').trim(), env.REPO ?? '');
+      const token = (env.GITHUB_TOKEN ?? '').trim();
+      const repo = env.REPO ?? '';
+      const check = await checkToken(token, repo);
+      const graphql = await checkGraphql(token, repo);
+      const user = await checkUser(token);
       return Response.json(
         {
-          tokenGueltig: check.ok,
-          meldung: check.ok ? 'Token ist gueltig und darf schreiben.' : check.message,
+          restApi: check.ok ? 'ok – Token gueltig und darf schreiben' : check.message,
+          graphqlApi: graphql,
+          benutzerAbfrage: user,
           benutzernameHinterlegt: Boolean(env.CMS_USERNAME),
           passwortHinterlegt: Boolean(env.CMS_PASSWORD),
         },
@@ -76,6 +81,57 @@ export default {
     return new Response('Method not allowed', { status: 405 });
   },
 };
+
+/**
+ * Sveltia CMS holt die Inhalte über die GraphQL-Schnittstelle. Fein granulierte
+ * Token verhalten sich dort anders als bei der REST-Schnittstelle – deshalb
+ * hier getrennt geprüft.
+ */
+async function checkGraphql(token, repo) {
+  const [owner, name] = repo.split('/');
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'content-type': 'application/json',
+        'user-agent': 'raeumdichgluecklich-auth',
+      },
+      body: JSON.stringify({
+        query: 'query($o:String!,$n:String!){ repository(owner:$o,name:$n){ id nameWithOwner } }',
+        variables: { o: owner, n: name },
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data?.errors?.length) {
+      return `FEHLER (${res.status}): ${data.errors.map((e) => e.message).join(' | ')}`;
+    }
+    if (data?.data?.repository?.nameWithOwner) {
+      return `ok – ${data.data.repository.nameWithOwner}`;
+    }
+    return `FEHLER (${res.status}): Repository nicht sichtbar`;
+  } catch (e) {
+    return `FEHLER: ${e.message}`;
+  }
+}
+
+/** Sveltia fragt zusätzlich das Benutzerprofil ab. */
+async function checkUser(token) {
+  try {
+    const res = await fetch('https://api.github.com/user', {
+      headers: {
+        authorization: `Bearer ${token}`,
+        accept: 'application/vnd.github+json',
+        'user-agent': 'raeumdichgluecklich-auth',
+      },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return `FEHLER (${res.status}): ${data?.message ?? 'unbekannt'}`;
+    return `ok – angemeldet als ${data.login}`;
+  } catch (e) {
+    return `FEHLER: ${e.message}`;
+  }
+}
 
 /**
  * Prüft den hinterlegten GitHub-Token, bevor er weitergereicht wird.
