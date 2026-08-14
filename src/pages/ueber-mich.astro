@@ -14,6 +14,11 @@ import d from '../data/ueber-mich.json';
       <p>{d.text1}</p>
       <p>{d.text2}</p>
       <p class="conviction serif-i">{d.conviction}</p>
+      {d.zertifikatDatei && (
+        <a class="arrow-link" href={d.zertifikatDatei} target="_blank" rel="noopener">
+          {d.zertifikatLabel || 'Zertifikat ansehen'} →
+        </a>
+      )}
     </div>
   </div>
 </section>

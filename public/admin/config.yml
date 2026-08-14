@@ -86,6 +86,8 @@ collections:
           - { name: text1, label: "Erster Absatz", widget: text }
           - { name: text2, label: "Zweiter Absatz", widget: text }
           - { name: conviction, label: "Hervorgehobener Satz (farbig, kursiv)", widget: text }
+          - { name: zertifikatDatei, label: "Zertifikat (PDF)", widget: file, required: false, hint: "Leer lassen, dann erscheint der Link nicht" }
+          - { name: zertifikatLabel, label: "Beschriftung des Zertifikat-Links", widget: string, required: false }
           - name: features
             label: "Drei Punkte «Was mich auszeichnet»"
             widget: list
